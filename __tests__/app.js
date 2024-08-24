@@ -17,6 +17,8 @@ describe("GET /api/hello", () => {
   it('should respond with a message "Hello from server"', async () => {
     const response = await request(server).get("/");
     expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual({ message: "Hello from server" });
+    expect(response.body).toEqual({
+      message: "Hello from server. Doing Github actions",
+    });
   });
 });
