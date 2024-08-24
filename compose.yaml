@@ -1,0 +1,10 @@
+services:
+  server:
+    build:
+      context: .
+    volumes:
+      - .:/app # Mounts the current directory to /app in the container
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8000:8000
