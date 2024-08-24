@@ -4,7 +4,7 @@ const app = express();
 
 app.get("/", (req, res, next) => {
   res.json({
-    message: "Hello from server.",
+    message: "Hello from server. Doing Github actions",
   });
 });
 

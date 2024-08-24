@@ -5,8 +5,34 @@ on:
     branches: ["main"]
 
 jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+     env:
+      NODE_ENV: test  # Sets NODE_ENV to "test" for all steps in this job
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: "Installing Dependencies"
+        run: npm i
+      - name: "Running test cases"
+        run: npm run test
+
   deploy:
     runs-on: ubuntu-latest
+
+    needs: unit-tests  # Ensures this job runs only after unit-tests job succeeds
+    
+    env:
+      NODE_ENV: production  # Sets NODE_ENV to "production" for all steps in this job
 
     steps:
       - uses: actions/checkout@v4
